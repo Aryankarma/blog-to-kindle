@@ -11,7 +11,7 @@ function FloatingMockup() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto w-full max-w-md z-50 bg-white"
+      className="relative mx-auto w-full max-w-md z-50"
     >
       {/* Shadow under the card */}
       <div className="absolute -bottom-4 left-4 right-4 h-20 rounded-3xl bg-ink/5 blur-2xl" />
@@ -108,7 +108,7 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollY, [0, 500], [0, 100]);
-  const opacity = useTransform(scrollY, [0, 1300], [1, 0]);
+  const opacity = useTransform(scrollY, [0, 1500], [1, 0]);
 
   const { displayedText, isComplete } = useTypewriter(
     "Your blogs deserve a better home.",
@@ -133,7 +133,7 @@ export function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -top-[5%] left-[5%] h-[700px] w-[700px] rounded-full bg-amber-400/30 blur-[130px]"
+          className="absolute -top-[10%] -left-[10%] h-[400px] w-[400px] rounded-full bg-amber-400/20 blur-[80px] md:-top-[5%] md:left-[5%] md:h-[700px] md:w-[700px] md:bg-amber-400/30 md:blur-[130px]"
         />
         <motion.div
           animate={{
@@ -145,7 +145,7 @@ export function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-[5%] right-[5%] h-[600px] w-[600px] rounded-full bg-sky-400/25 blur-[130px]"
+          className="absolute top-[10%] -right-[10%] h-[350px] w-[350px] rounded-full bg-sky-400/15 blur-[80px] md:top-[5%] md:right-[5%] md:h-[600px] md:w-[600px] md:bg-sky-400/25 md:blur-[130px]"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(0,0,0,0.12),transparent_60%)]" />
       </motion.div>
