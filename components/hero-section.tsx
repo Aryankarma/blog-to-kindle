@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import { useTypewriter } from "@/hooks/use-typewriter"
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useTypewriter } from "@/hooks/use-typewriter";
 
 function FloatingMockup() {
   return (
@@ -11,7 +11,7 @@ function FloatingMockup() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto w-full max-w-md"
+      className="relative mx-auto w-full max-w-md z-50 bg-white"
     >
       {/* Shadow under the card */}
       <div className="absolute -bottom-4 left-4 right-4 h-20 rounded-3xl bg-ink/5 blur-2xl" />
@@ -54,58 +54,106 @@ function FloatingMockup() {
               className="h-full rounded-full bg-ink"
               initial={{ width: "0%" }}
               animate={{ width: "67%" }}
-              transition={{ duration: 2.5, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 2.5,
+                delay: 1.5,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             />
           </div>
         </div>
 
         {/* File list */}
         <div className="flex flex-col gap-1.5">
-          {["How to Get Rich.pdf", "Naval on Happiness.pdf", "Seek Wealth, Not Money.pdf"].map(
-            (file, i) => (
-              <motion.div
-                key={file}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 2 + i * 0.3, duration: 0.5 }}
-                className="flex items-center gap-2.5 rounded-md px-2 py-1.5"
-              >
-                <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-ink">
-                  <svg className="h-3 w-3 text-[#ffffff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <span className="font-mono text-[12px] text-ink/70">{file}</span>
-              </motion.div>
-            )
-          )}
+          {[
+            "How to Get Rich.pdf",
+            "Naval on Happiness.pdf",
+            "Seek Wealth, Not Money.pdf",
+          ].map((file, i) => (
+            <motion.div
+              key={file}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 2 + i * 0.3, duration: 0.5 }}
+              className="flex items-center gap-2.5 rounded-md px-2 py-1.5"
+            >
+              <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-ink">
+                <svg
+                  className="h-3 w-3 text-[#ffffff]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <span className="font-mono text-[12px] text-ink/70">{file}</span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export function HeroSection() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
+  const ref = useRef(null);
+  const { scrollY } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
-  })
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120])
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  });
+  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 1300], [1, 0]);
 
   const { displayedText, isComplete } = useTypewriter(
     "Your blogs deserve a better home.",
     45,
-    600
-  )
+    600,
+  );
 
   return (
     <section ref={ref} className="relative overflow-hidden pt-16">
-      {/* Subtle radial gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-5%,rgba(0,0,0,0.03),transparent)]" />
+      {/* Ambient background elements */}
+      <motion.div
+        style={{ opacity: opacity }}
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        <motion.div
+          animate={{
+            x: [0, 20, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -top-[5%] left-[5%] h-[700px] w-[700px] rounded-full bg-amber-400/30 blur-[130px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-[5%] right-[5%] h-[600px] w-[600px] rounded-full bg-sky-400/25 blur-[130px]"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(0,0,0,0.12),transparent_60%)]" />
+      </motion.div>
 
-      <motion.div style={{ y, opacity }} className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8"
+      >
         <div className="flex flex-col items-center pb-24 pt-20 md:pb-32 md:pt-28">
           {/* Pill badge */}
           <motion.div
@@ -166,5 +214,5 @@ export function HeroSection() {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }

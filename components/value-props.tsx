@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const features = [
   {
@@ -11,7 +11,16 @@ const features = [
       "nav.al, Substack, Medium, WordPress, personal blogs. If it has text, we can convert it. Our scraper handles even the messiest HTML.",
     visual: (
       <div className="flex flex-wrap gap-2">
-        {["nav.al", "substack.com", "medium.com", "paulgraham.com", "seths.blog"].map((url) => (
+        {[
+          "nav.al",
+          "substack.com",
+          "medium.com",
+          "paulgraham.com",
+          "seths.blog",
+          "ribbonfarm.com",
+          "thebrowser.com",
+          "waitbutwhy.com",
+        ].map((url) => (
           <span
             key={url}
             className="rounded-full border border-[#e0e0e0] bg-[#ffffff] px-3 py-1 font-mono text-[11px] text-ink"
@@ -52,11 +61,11 @@ const features = [
       </div>
     ),
   },
-]
+];
 
 export function ValueProps() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="features" className="py-24 lg:py-32">
@@ -114,5 +123,5 @@ export function ValueProps() {
         </div>
       </div>
     </section>
-  )
+  );
 }
