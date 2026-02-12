@@ -10,7 +10,7 @@ const features = [
     description:
       "nav.al, Substack, Medium, WordPress, personal blogs. If it has text, we can convert it. Our scraper handles even the messiest HTML.",
     visual: (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex max-w-md flex-wrap md:items-center md:justify-center gap-2">
         {[
           "nav.al",
           "substack.com",
@@ -19,7 +19,7 @@ const features = [
           "seths.blog",
           "ribbonfarm.com",
           "thebrowser.com",
-          "waitbutwhy.com",
+          // "waitbutwhy.com",
         ].map((url) => (
           <span
             key={url}
