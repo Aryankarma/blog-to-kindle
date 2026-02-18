@@ -1,24 +1,26 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
-]
+];
 
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
@@ -29,24 +31,29 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
-        <a href="#" className="flex items-center gap-1.5">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-ink">
-            <span className="font-serif text-sm italic text-[#ffffff]">K</span>
+        <Link href="/" className="flex items-center gap-1.5">
+          <div className="relative h-7 w-7">
+            <Image
+              src="/kindl_logo.png"
+              alt="KindleFlow Logo"
+              fill
+              className="object-contain"
+            />
           </div>
           <span className="text-[15px] font-semibold tracking-tight text-ink">
             KindleFlow
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className="text-[13px] font-medium text-stone transition-colors duration-200 hover:text-ink"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -117,5 +124,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </nav>
-  )
+  );
 }

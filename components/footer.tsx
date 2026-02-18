@@ -1,11 +1,14 @@
-"use client"
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
 
 const footerLinks = {
   Product: ["Features", "Pricing", "API", "Changelog"],
   Company: ["About", "Blog", "Careers", "Contact"],
   Resources: ["Help Center", "Documentation", "Status", "GitHub"],
   Legal: ["Privacy", "Terms", "Security"],
-}
+};
 
 export function Footer() {
   return (
@@ -15,17 +18,22 @@ export function Footer() {
         <div className="grid gap-10 py-16 md:grid-cols-6">
           {/* Brand */}
           <div className="md:col-span-2">
-            <a href="#" className="mb-4 flex items-center gap-1.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-ink">
-                <span className="font-serif text-sm italic text-[#ffffff]">K</span>
+            <Link href="/" className="mb-4 flex items-center gap-1.5">
+              <div className="relative h-7 w-7">
+                <Image
+                  src="/kindl_logo.png"
+                  alt="KindleFlow Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="text-[15px] font-semibold tracking-tight text-ink">
                 KindleFlow
               </span>
-            </a>
+            </Link>
             <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-stone">
-              Transform the internet into your personal library. Built for readers who
-              love their Kindle.
+              Transform the internet into your personal library. Built for
+              readers who love their Kindle.
             </p>
           </div>
 
@@ -79,5 +87,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
